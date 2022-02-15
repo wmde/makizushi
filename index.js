@@ -1,7 +1,6 @@
 var fs = require('fs'),
     path = require('path'),
     blend = require('@kartotherian/blend'),
-    xtend = require('xtend'),
     errcode = require('err-code');
 
 var markerCache = require('./cache');
@@ -56,7 +55,7 @@ module.exports = getMarker;
  */
 function getMarker(options, callback) {
     // prevent .parsedTint from being attached to options
-    options = xtend({}, options);
+    options = {...options};
     if (options.tint) {
         // Expand hex shorthand (3 chars) to 6, e.g. 333 => 333333.
         // This is not done upstream in `node-tint` as some such
@@ -111,10 +110,11 @@ function loadMaki(options, callback) {
 
         // If symbol is present, find correct offset (varies by marker size).
         if (symbol) {
-            parts.push(xtend({
+            parts.push({
                 buffer: data,
                 tint: blend.parseTintString('0x0;0x0;1.4x0'),
-            }, offsets[size + (options.retina ? '@2x' : '')]));
+                ...offsets[size + (options.retina ? '@2x' : '')]
+            });
         }
 
         // Add mask layer.
@@ -175,10 +175,11 @@ function loadCached(options, callback) {
 
     // If symbol is present, find correct offset (varies by marker size).
     if (symbol) {
-        parts.push(xtend({
+        parts.push({
             buffer: markerCache.symbol[symbol],
             tint: blend.parseTintString('0x0;0x0;1.4x0'),
-        }, offsets[size + (options.retina ? '@2x' : '')]));
+            ...offsets[size + (options.retina ? '@2x' : '')]
+        });
     }
 
     // Add mask layer.
