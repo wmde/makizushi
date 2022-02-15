@@ -19,7 +19,7 @@ var sizes = { s: 11, m: 15, l: 20 },
 var aliases = {
     'america-football': 'american-football',
     'camera': 'attraction',
-    'chemist': 'college',
+    'chemist': 'pharmacy',
     'disability': 'wheelchair',
     'emergency-telephone': 'emergency-phone',
     'industrial': 'industry',
