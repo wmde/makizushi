@@ -9,20 +9,40 @@ registerWindow(window, window.document)
 const sizes = [11, 15, 20]
 
 function renderTextToSvg(text) {
+	const baseFontSize = 92;
+	const baseFontStyle = {
+		family: 'Open Sans',
+		weight: 'bold',
+		color: '#000000',
+		fill: '#444444',
+		'size': '108px',
+		'text-anchor': 'middle',
+		'text-align': 'center',
+		'dominant-baseline': 'middle',
+	}
 	const doc = SVG(window.document.documentElement).size(100, 100)
-	doc.group()
+	const group = doc.group()
+	group
 		.text(text)
+		.x(50).y(60)
 		.font({
-			family: 'Open Sans',
-			size: '72px',
-			weight: 'bold',
-			color: '#000000',
-			fill: '#444444',
-			'text-anchor': 'middle',
-			'dominant-baseline': 'middle',
+			...baseFontStyle,
+			size: `${baseFontSize * 1.18}px`,
+			//stroke: '#ffffff',
+			'stroke-width': '8',
+			stroke: '#ff0000',
+			//'stroke-opacity': '0.3',
+			// 'stroke-linecap': 'butt',
+			// 'stroke-linejoin': 'miter',
+			// 'stroke-miterlimit': '8',
 		})
-		.cx(50)
-		.cy(50)
+	group
+		.text(text)
+		.x(50).y(60)
+		.font({
+			...baseFontStyle,
+			size: `${baseFontSize}px`,
+		})
 
 	return doc.svg()
 }
@@ -42,3 +62,6 @@ function renderAllPngs(text) {
 }
 
 renderAllPngs("1")
+
+const fs = require('fs')
+fs.writeFileSync("o.svg", renderTextToSvg("1"))
