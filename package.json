@@ -15,7 +15,8 @@
     "@mapbox/maki": "^7.2.0",
     "@svgdotjs/svg.js": "^3.1.2",
     "svgdom": "^0.1.10",
-    "tap": "~0.4.8"
+    "tap": "~0.4.8",
+    "xml-formatter": "^2.6.1"
   },
   "scripts": {
     "test": "./test/sizes.sh && tap test/*.js"
